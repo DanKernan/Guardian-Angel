@@ -16,29 +16,37 @@ import java.lang.Math;
  */
 public class accel extends Activity implements SensorEventListener{
     public final int SAMPLERATE_US = 10;
+    public final int SAMPLETIME = 2000000;
+    private int dataSize;
 
-    private final SensorManager mSensorManager;
-    private final Sensor mAccelerometer;
+    private  SensorManager mSensorManager;
+    private  Sensor mAccelerometer;
     private double[] accelData;
     private int counter;
 
-    public accel() {
+
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        accelData = new double[5000000/SAMPLERATE_US];
+        dataSize =  SAMPLETIME/SAMPLERATE_US;
+        accelData = new double[dataSize];
+        counter = 0;
 
     }
 
 
 
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         mSensorManager.registerListener(this, mAccelerometer, SAMPLERATE_US);
     }
 
     protected void onPause() {
         super.onPause();
-        mSensorManager.unregisterListener(this);
+        //mSensorManager.unregisterListener(this);
+        //never stops listening
     }
 
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
@@ -49,9 +57,27 @@ public class accel extends Activity implements SensorEventListener{
                                     Math.pow(event.values[1],2)+
                                     Math.pow(event.values[2],2))-9.8;
 
+        accelData[counter]= magnitude;
+        counter++;
+        counter = counter % dataSize;
 
     }
 
+    public double[] getData(){
+        return accelData;
+    }
+    public int getDataSize(){
+        return dataSize;
+    }
+
+    public double getAvg(){
+        double total = 0;
+        for (int i = 0; i < dataSize; i++){
+            total += accelData[i];
+        }
+        double avg = total/(double)dataSize;
+        return avg;
+    }
 
 
 

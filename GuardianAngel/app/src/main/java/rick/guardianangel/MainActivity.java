@@ -6,12 +6,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.os.Handler;
+
 public class MainActivity extends AppCompatActivity {
+    private Handler accelHandler = new Handler();
+    private double currentAvg;
+
+//    private Runnable checkAccel = new Runnable() {
+//        @Override
+//        public void run() {
+//            currentAvg = sensor.getAvg();
+//            accelHandler.postDelayed(checkAccel,300);
+//        }
+//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        currentAvg = 0;
+        //Intent startaccel = new Intent(this,accel.class);
+        //this.startActivity(startaccel);
+        //accelHandler.post(checkAccel);
     }
 
     @Override
