@@ -34,7 +34,8 @@
         android:id="@+id/submit"
         android:layout_below="@+id/editText"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="setContact"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -64,5 +65,6 @@
         android:id="@+id/submit2"
         android:layout_below="@+id/editText2"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="setAlarm"/>
 </RelativeLayout>
