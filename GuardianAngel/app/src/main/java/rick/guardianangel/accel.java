@@ -98,7 +98,7 @@ public class accel  implements SensorEventListener{
         for (int i = 14; i <44; i++){
             score += f[i]/30.0;
         }
-        Log.v("score",""+score);
+        //Log.v("score",""+score);
         return score;
     }
 

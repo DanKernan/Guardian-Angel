@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         vibrate.vibrate(vibby);
         new AlertDialog.Builder(this)
                 .setTitle("Fall Detected")
-                .setMessage("ARE YOU OKAY?? GET UP BIIIIITCH?")
+                .setMessage("Are you ok? Do you need assistance?")
                 .setPositiveButton("I'm Okay.", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {//stops vibration and music
                         mp.stop();
@@ -42,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
                         awake = true;
                     }
                 })
-                .setNegativeButton("HELP ME!!", new DialogInterface.OnClickListener() {//calls rick
+                .setNegativeButton("HELP ME!", new DialogInterface.OnClickListener() {//calls rick
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(Intent.ACTION_CALL);
-                        intent.setData(Uri.parse("tel:2165369645"));//hard coded rick's number
+                        intent.setData(Uri.parse("tel:4405914066"));//hard coded rick's number
                         startActivity(intent);
                         mp.stop();
                         awake = true;
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 if(awake==false){
                     mp.stop();
                     Intent intent = new Intent(Intent.ACTION_CALL);
-                    intent.setData(Uri.parse("tel:2165369645"));//hard coded rick's number
+                    intent.setData(Uri.parse("tel:4405914066"));//hard coded rick's number
                     startActivity(intent);
                 }
             }
@@ -92,21 +92,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void vibrateAlert(){
-        Vibrator vibrate;
-        vibrate = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        new AlertDialog.Builder(this).setTitle("Fall Detected").setMessage("ARE YOU OKAY?? GET UP BIIIIITCH").setNegativeButton("I'm Okay.", null).show();
-        int vibby = 5000;
-        vibrate.vibrate(vibby);
-    }
+//    private void vibrateAlert(){
+//        Vibrator vibrate;
+//        vibrate = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+//        new AlertDialog.Builder(this).setTitle("Fall Detected").setMessage("ARE YOU OKAY?? GET UP BIIIIITCH").setNegativeButton("I'm Okay.", null).show();
+//        int vibby = 5000;
+//        vibrate.vibrate(vibby);
+//    }
 
     private Runnable checkAccel = new Runnable() {
         @Override
         public void run() {
             //Log.v("","i got here");
-            accelClass.getScore();
+
             //Log.v("accel log: ",""+currentAvg);
-            if (currentAvg >10){
+            if (accelClass.getScore() >15){
                 alert();
             }
             else {
