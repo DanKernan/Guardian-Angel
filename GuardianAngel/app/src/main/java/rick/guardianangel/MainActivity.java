@@ -3,12 +3,12 @@ package rick.guardianangel;
 import android.content.Intent;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import android.os.Handler;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
     private Handler accelHandler = new Handler();
@@ -78,5 +78,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+//  On click, start settings view
+    public void sendMessage(View view) {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 }
