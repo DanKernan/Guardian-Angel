@@ -1,8 +1,11 @@
 package rick.guardianangel;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.os.Handler;
@@ -16,13 +19,33 @@ public class MainActivity extends AppCompatActivity {
     private Handler accelHandler = new Handler();
     private accel accelClass;
     private double currentAvg;
-
-    private void vibrateAlert(){
-        Vibrator vibrate;
-        vibrate = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        new AlertDialog.Builder(this).setTitle("Fall Detected").setMessage("ARE YOU OKAY?? GET UP BIIIIITCH").setNegativeButton("I'm Okay.", null).show();
-        int vibby = 5000;
+    protected Vibrator vibrate;
+    public void alert()
+    {
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.rickastley_artists);//music
+        mp.start();
+        vibrate = (Vibrator) getSystemService(VIBRATOR_SERVICE);//vibration
+        int vibby = 10000;
         vibrate.vibrate(vibby);
+
+        new AlertDialog.Builder(this)
+                .setTitle("Fall Detected")
+                .setMessage("ARE YOU OKAY?? GET UP BIIIIITCH?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {//stops vibration and music
+                        mp.stop();
+                        vibrate.cancel();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {//calls rick
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(Intent.ACTION_CALL);
+                        intent.setData(Uri.parse("tel:2165369645"));//hard coded rick's number
+                        startActivity(intent);
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     private Runnable checkAccel = new Runnable() {
@@ -32,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             currentAvg = accelClass.getAvg();
             Log.v("accel log: ",""+currentAvg);
             if (currentAvg >10){
-                vibrateAlert();
+                alert();
             }
             else {
                 accelHandler.postDelayed(checkAccel, 300);
