@@ -81,6 +81,10 @@ public class SettingsActivity extends AppCompatActivity {
     }
     //On Click will store the contact number in an intent
     public void setContact(View view) {
+        new AlertDialog.Builder(this)
+                .setTitle("Submitted")
+                .setMessage("Recorded in Profile");
+        /*
         Button btn = (Button) findViewById(R.id.submit);
         btn.setOnClickListener(new View.OnClickListener(){
               public void onClick(View v){
@@ -92,10 +96,14 @@ public class SettingsActivity extends AppCompatActivity {
                   intent.putExtra("contact", userNumber);
               }
             }
-        );
+        );*/
     }
     //On Click will store the alarm in an intent
     public void setAlarm(View view) {
+        new AlertDialog.Builder(this)
+                .setTitle("Submitted")
+                .setMessage("Recorded in Profile");
+        /*
         Button btn = (Button) findViewById(R.id.submit);
         btn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -107,7 +115,7 @@ public class SettingsActivity extends AppCompatActivity {
                 intent.putExtra("alarm", userNumber2);
             }
         }
-        );
+        );*/
     }
 
 }
