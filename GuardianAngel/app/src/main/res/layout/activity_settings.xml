@@ -34,13 +34,14 @@
         android:id="@+id/submit"
         android:layout_below="@+id/editText"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="setContact" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Set Alarm Timer"
+        android:text="Set Alarm Timer (seconds)"
         android:id="@+id/textView2"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
@@ -64,5 +65,6 @@
         android:id="@+id/submit2"
         android:layout_below="@+id/editText2"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="setAlarm"/>
 </RelativeLayout>

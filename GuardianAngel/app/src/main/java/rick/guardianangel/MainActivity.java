@@ -16,6 +16,27 @@ public class MainActivity extends AppCompatActivity {
     private Handler accelHandler = new Handler();
     private accel accelClass;
     private double currentAvg;
+    private int alarm;
+    private int eContact;
+
+    public int geteContact() {
+        return eContact;
+    }
+
+    public void seteContact(int eContact) {
+        this.eContact = eContact;
+    }
+
+
+
+    public int getAlarm() {
+        return alarm;
+    }
+
+    public void setAlarm(int alarm) {
+        this.alarm = alarm;
+    }
+
 
     private void vibrateAlert(){
         Vibrator vibrate;
@@ -52,9 +73,6 @@ public class MainActivity extends AppCompatActivity {
         //Intent startaccel = new Intent(this,accel.class);
         //this.startActivity(startaccel);
         accelHandler.post(checkAccel);
-
-
-
     }
 
     @Override

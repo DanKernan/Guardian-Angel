@@ -1,6 +1,7 @@
 package rick.guardianangel;
 
 import android.app.AlertDialog;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -10,6 +11,10 @@ import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.content.Intent;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -73,6 +78,36 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    //On Click will store the contact number in an intent
+    public void setContact(View view) {
+        Button btn = (Button) findViewById(R.id.submit);
+        btn.setOnClickListener(new View.OnClickListener(){
+              public void onClick(View v){
+                    EditText userEntry = (EditText) findViewById(R.id.editText);
+                    String userData = userEntry.getText().toString();
+                    int userNumber= Integer.parseInt(userData);
+
+                  Intent intent = new Intent(SettingsActivity.this, SettingsActivity.class);
+                  intent.putExtra("contact", userNumber);
+              }
+            }
+        );
+    }
+    //On Click will store the alarm in an intent
+    public void setAlarm(View view) {
+        Button btn = (Button) findViewById(R.id.submit);
+        btn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                EditText userEntry = (EditText) findViewById(R.id.editText2);
+                String userData = userEntry.getText().toString();
+                int userNumber2= Integer.parseInt(userData);
+
+                Intent intent = new Intent(SettingsActivity.this, SettingsActivity.class);
+                intent.putExtra("alarm", userNumber2);
+            }
+        }
+        );
     }
 
 }
