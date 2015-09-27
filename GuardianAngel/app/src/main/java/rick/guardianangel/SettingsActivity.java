@@ -1,18 +1,25 @@
 package rick.guardianangel;
 
+import android.app.AlertDialog;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class SettingsActivity extends AppCompatActivity {
-
+    protected Vibrator vibrate;
+    protected long lastSeconds;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-    }
 
+        vibrate = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        new AlertDialog.Builder(this).setTitle("Fall Detected").setMessage("ARE YOU OKAY?? GET UP BIIIIITCH").setNegativeButton("I'm Okay.", null).show();
+        int vibby = 10000;
+        vibrate.vibrate(vibby);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
