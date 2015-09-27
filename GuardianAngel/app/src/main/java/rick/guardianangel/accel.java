@@ -14,7 +14,7 @@ import java.lang.Math;
 /**
  * Created by Rick on 9/26/2015.
  */
-public class accel extends Activity implements SensorEventListener{
+public class accel  implements SensorEventListener{
     public final int SAMPLERATE_US = 10;
     public final int SAMPLETIME = 2000000;
     private int dataSize;
@@ -26,9 +26,8 @@ public class accel extends Activity implements SensorEventListener{
 
 
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+    protected accel(SensorManager sm, MainActivity ma) {
+        mSensorManager = sm;
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         dataSize =  SAMPLETIME/SAMPLERATE_US;
         accelData = new double[dataSize];
@@ -39,15 +38,13 @@ public class accel extends Activity implements SensorEventListener{
 
 
     protected void onStart() {
-        super.onStart();
         mSensorManager.registerListener(this, mAccelerometer, SAMPLERATE_US);
     }
 
-    protected void onPause() {
-        super.onPause();
-        //mSensorManager.unregisterListener(this);
-        //never stops listening
-    }
+//    protected void onPause() {
+//        //mSensorManager.unregisterListener(this);
+//        //never stops listening
+//    }
 
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
