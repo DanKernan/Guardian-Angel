@@ -16,8 +16,9 @@ import java.lang.Math;
  * Created by Rick on 9/26/2015.
  */
 public class accel  implements SensorEventListener{
-    public final int SAMPLERATE_US = 500;
-    public final int SAMPLETIME = 500000;
+    public final int SAMPLERATE_US = 20000;
+    public final int SAMPLETIME = 1000000;
+    public final int pwrtwo = 64;
     private int dataSize;
 
     private  SensorManager mSensorManager;
@@ -31,7 +32,7 @@ public class accel  implements SensorEventListener{
         mSensorManager = sm;
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         dataSize =  SAMPLETIME/SAMPLERATE_US;
-        accelData = new double[dataSize];
+        accelData = new double[pwrtwo];
         counter = 0;
         //Log.v("","constructed sm");
     }
@@ -76,6 +77,29 @@ public class accel  implements SensorEventListener{
         }
         double avg = total/(double)dataSize;
         return avg;
+    }
+
+    public double[] getfft(){
+
+        Complex[] timeD = new Complex[pwrtwo];
+        for (int i = 0; i< pwrtwo; i++){
+            timeD[i] = new Complex(accelData[i]);
+        }
+        Complex[] freqD = fft.fft(timeD);
+        double[] realfd = new double[pwrtwo];
+        for (int i = 0; i<pwrtwo; i++){
+            realfd[i]= freqD[i].abs();
+        }
+        return realfd;
+    }
+    public double getScore(){
+        double f[] = getfft();
+        double score = 0;
+        for (int i = 14; i <44; i++){
+            score += f[i]/30.0;
+        }
+        Log.v("score",""+score);
+        return score;
     }
 
 

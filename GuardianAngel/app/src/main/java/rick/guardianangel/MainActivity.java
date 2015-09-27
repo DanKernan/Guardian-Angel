@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             //Log.v("","i got here");
-            currentAvg = accelClass.getAvg();
-            Log.v("accel log: ",""+currentAvg);
+            accelClass.getScore();
+            //Log.v("accel log: ",""+currentAvg);
             if (currentAvg >10){
                 vibrateAlert();
             }
