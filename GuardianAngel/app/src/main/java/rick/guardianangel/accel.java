@@ -16,8 +16,8 @@ import java.lang.Math;
  * Created by Rick on 9/26/2015.
  */
 public class accel  implements SensorEventListener{
-    public final int SAMPLERATE_US = 20000;
-    public final int SAMPLETIME = 1000000;
+    public final int SAMPLERATE_US = 15000;
+    public final int SAMPLETIME = 750000;
     public final int pwrtwo = 64;
     private int dataSize;
 
@@ -95,10 +95,10 @@ public class accel  implements SensorEventListener{
     public double getScore(){
         double f[] = getfft();
         double score = 0;
-        for (int i = 14; i <44; i++){
-            score += f[i]/30.0;
+        for (int i = 14; i <54; i++){
+            score += f[i]/40.0;
         }
-        //Log.v("score",""+score);
+        Log.v("score",""+score);
         return score;
     }
 

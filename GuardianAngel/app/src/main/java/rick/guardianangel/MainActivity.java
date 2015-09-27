@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             //Log.v("","i got here");
 
             //Log.v("accel log: ",""+currentAvg);
-            if (accelClass.getScore() >15){
+            if (accelClass.getScore() >11){
                 alert();
             }
             else {
