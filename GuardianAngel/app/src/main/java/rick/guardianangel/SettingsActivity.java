@@ -83,7 +83,8 @@ public class SettingsActivity extends AppCompatActivity {
     public void setContact(View view) {
         new AlertDialog.Builder(this)
                 .setTitle("Submitted")
-                .setMessage("Recorded in Profile");
+                .setMessage("Recorded in Profile")
+                .show();
         /*
         Button btn = (Button) findViewById(R.id.submit);
         btn.setOnClickListener(new View.OnClickListener(){
@@ -102,7 +103,8 @@ public class SettingsActivity extends AppCompatActivity {
     public void setAlarm(View view) {
         new AlertDialog.Builder(this)
                 .setTitle("Submitted")
-                .setMessage("Recorded in Profile");
+                .setMessage("Recorded in Profile")
+                .show();
         /*
         Button btn = (Button) findViewById(R.id.submit);
         btn.setOnClickListener(new View.OnClickListener(){
