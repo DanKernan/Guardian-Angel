@@ -1,13 +1,11 @@
 package rick.guardianangel;
 
-import android.content.Intent;
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import android.os.Handler;
-
 public class MainActivity extends AppCompatActivity {
     private Handler accelHandler = new Handler();
     private double currentAvg;
@@ -47,13 +45,32 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
 
-            Intent intent = new Intent(this,SettingsActivity.class);
-            startActivity(intent);
-            return true;
+
+
+            //Toast.makeText(this, "Baby pls", Toast.LENGTH_LONG).show();
+
+            new AlertDialog.Builder(this).setTitle("Fall Detected").setMessage("ARE YOU OKAY??").setNegativeButton("I'm Okay.", null).show();
+
+//            final int NOTIF_ID = 1234;
+//
+//            NotificationManager notifManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+//            Notification note = new Notification(R.mipmap.ic_launcher, "Get up Bitch", System.currentTimeMillis());
+//
+//            PendingIntent intentp = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0);
+//
+//            //note.setLatestEventInfo(this, "New E-mail", "You have one unread message.", intentp);
+//
+//
+//            notifManager.notify(NOTIF_ID, note);
+
+
+
 
 //            Intent intent = new Intent(Intent.ACTION_CALL);
 //            intent.setData(Uri.parse("tel:2165369645"));
 //            startActivity(intent);
+            //Intent intent = new Intent(this,SettingsActivity.class);
+            //startActivity(intent);
 //            return true;
         }
 
