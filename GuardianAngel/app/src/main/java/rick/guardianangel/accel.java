@@ -8,6 +8,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Log;
 import android.widget.TextView;
 import java.lang.Math;
 
@@ -15,7 +16,7 @@ import java.lang.Math;
  * Created by Rick on 9/26/2015.
  */
 public class accel  implements SensorEventListener{
-    public final int SAMPLERATE_US = 10;
+    public final int SAMPLERATE_US = 10000;
     public final int SAMPLETIME = 2000000;
     private int dataSize;
 
@@ -32,12 +33,12 @@ public class accel  implements SensorEventListener{
         dataSize =  SAMPLETIME/SAMPLERATE_US;
         accelData = new double[dataSize];
         counter = 0;
-
+        Log.v("","constructed sm");
     }
 
 
 
-    protected void onStart() {
+    public void onResume() {
         mSensorManager.registerListener(this, mAccelerometer, SAMPLERATE_US);
     }
 
@@ -55,6 +56,7 @@ public class accel  implements SensorEventListener{
                                     Math.pow(event.values[2],2))-9.8;
 
         accelData[counter]= magnitude;
+        //Log.v("mag",""+magnitude);
         counter++;
         counter = counter % dataSize;
 
@@ -70,7 +72,7 @@ public class accel  implements SensorEventListener{
     public double getAvg(){
         double total = 0;
         for (int i = 0; i < dataSize; i++){
-            total += accelData[i];
+            total += Math.abs(accelData[i]);
         }
         double avg = total/(double)dataSize;
         return avg;

@@ -18,8 +18,9 @@ public class MainActivity extends AppCompatActivity {
     private Runnable checkAccel = new Runnable() {
         @Override
         public void run() {
+            Log.v("","i got here");
             currentAvg = accelClass.getAvg();
-            Log.v("\naccel log: ",""+currentAvg);
+            Log.v("accel log: ",""+currentAvg);
             accelHandler.postDelayed(checkAccel,300);
         }
     };
@@ -27,14 +28,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.v("hi","there");
+        Log.v("", "hi there");
+        Handler accelHandler = new Handler();
         setContentView(R.layout.activity_main);
         currentAvg = 0;
         accelClass = new accel((SensorManager)getSystemService(SENSOR_SERVICE),this);
         //Intent startaccel = new Intent(this,accel.class);
         //this.startActivity(startaccel);
         accelHandler.post(checkAccel);
+
+
+
     }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        accelClass.onResume();
+    }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
