@@ -16,8 +16,8 @@ import java.lang.Math;
  * Created by Rick on 9/26/2015.
  */
 public class accel  implements SensorEventListener{
-    public final int SAMPLERATE_US = 10000;
-    public final int SAMPLETIME = 2000000;
+    public final int SAMPLERATE_US = 500;
+    public final int SAMPLETIME = 500000;
     private int dataSize;
 
     private  SensorManager mSensorManager;
@@ -33,7 +33,7 @@ public class accel  implements SensorEventListener{
         dataSize =  SAMPLETIME/SAMPLERATE_US;
         accelData = new double[dataSize];
         counter = 0;
-        Log.v("","constructed sm");
+        //Log.v("","constructed sm");
     }
 
 
@@ -53,7 +53,7 @@ public class accel  implements SensorEventListener{
     public void onSensorChanged(SensorEvent event) {
         double magnitude= Math.sqrt(Math.pow(event.values[0],2)+
                                     Math.pow(event.values[1],2)+
-                                    Math.pow(event.values[2],2))-9.8;
+                                    Math.pow(event.values[2],2))-9.5;
 
         accelData[counter]= magnitude;
         //Log.v("mag",""+magnitude);

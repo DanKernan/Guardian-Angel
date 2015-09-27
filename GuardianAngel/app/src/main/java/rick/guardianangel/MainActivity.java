@@ -1,34 +1,50 @@
 package rick.guardianangel;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import android.os.Handler;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
     private Handler accelHandler = new Handler();
     private accel accelClass;
     private double currentAvg;
 
+    private void vibrateAlert(){
+        Vibrator vibrate;
+        vibrate = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        new AlertDialog.Builder(this).setTitle("Fall Detected").setMessage("ARE YOU OKAY?? GET UP BIIIIITCH").setNegativeButton("I'm Okay.", null).show();
+        int vibby = 5000;
+        vibrate.vibrate(vibby);
+    }
+
     private Runnable checkAccel = new Runnable() {
         @Override
         public void run() {
-            Log.v("","i got here");
+            //Log.v("","i got here");
             currentAvg = accelClass.getAvg();
             Log.v("accel log: ",""+currentAvg);
-            accelHandler.postDelayed(checkAccel,300);
+            if (currentAvg >10){
+                vibrateAlert();
+            }
+            else {
+                accelHandler.postDelayed(checkAccel, 300);
+            }
+
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.v("", "hi there");
+        //Log.v("", "hi there");
         Handler accelHandler = new Handler();
         setContentView(R.layout.activity_main);
         currentAvg = 0;
@@ -78,5 +94,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+//  On click, start settings view
+    public void sendMessage(View view) {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 }
